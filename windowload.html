@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <title>window.onload()</title>
+   <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+   <script>
+      window.onload = (event) => {
+         console.log("The first call will not be loaded if there are two window.onload calls");
+      };
+      window.onload = (event) => {
+         console.log("The second call is loaded while using window.onload");
+      };
+   </script>
+</head>
+<body id="body">
+   <h1>window.onload()</h1>
+</body>
+</html>
+
