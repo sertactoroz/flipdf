@@ -1,3 +1,5 @@
+<link rel="stylesheet" href="../assets/css/password-message-style.css" />
+
 <!-- ====== Signin Form Section Start -->
 <section class="bg-[#F4F7FF] py-14 lg:py-20">
       <div class="container">
@@ -347,3 +349,5 @@
       </div>
     </section>
     <!-- ====== Forms Section End -->
+
+    <script src="../assets/js/signin.js"></script>

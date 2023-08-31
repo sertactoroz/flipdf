@@ -1,7 +1,7 @@
 
 <?php 
     session_start();
-   ?>
+?>
       
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
@@ -10,7 +10,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>
-      Play | Free Tailwind CSS Template for Startup and SaaS By TailGrids
+      Flipbook Generator
     </title>
     <link
       rel="shortcut icon"
@@ -18,7 +18,6 @@
       type="image/x-icon"
     />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="../assets/css/password-message-style.css" />
     <link rel="stylesheet" href="../assets/css/animate.css" />
     <link rel="stylesheet" href="../assets/css/tailwind.css" />
 
@@ -175,7 +174,9 @@
             </div>
 
 
-            <?php
+<?php
+// SECURITY - bu bağlantıyı user uid ile yapmak lazım
+
 if (isset($_SESSION['user_name']) && !empty($_SESSION['user_name'])) {
     $user_name = $_SESSION['user_name'];
 ?>
@@ -187,7 +188,11 @@ if (isset($_SESSION['user_name']) && !empty($_SESSION['user_name'])) {
         Logout
         </a>
     </div>
+
+
 <?php } else { ?>
+
+  
     <div class="hidden justify-end pr-16 sm:flex lg:pr-0">
         <a href="../screens/signin-screen.php" class="loginBtn py-3 px-7 text-base font-medium text-white hover:opacity-70">
         Sign In

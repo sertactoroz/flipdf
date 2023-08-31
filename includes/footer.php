@@ -631,56 +631,6 @@
   
 
     <script src="../assets/js/main.js"></script>
-    <script>
-      // ==== for menu scroll
-      const pageLink = document.querySelectorAll(".ud-menu-scroll");
 
-      pageLink.forEach((elem) => {
-        elem.addEventListener("click", (e) => {
-          // console.log(elem);
-          // e.preventDefault();
-          let targetElemAttr = document.querySelector(elem.getAttribute("href").replace("index-screen.php",""));
-          // console.log("attr",targetElemAttr);
-
-          targetElemAttr.scrollIntoView({
-            behavior: "smooth",
-            offsetTop: 1 - 60,
-          });
-        });
-      });
-
-      // section menu active
-      function onScroll(event) {
-        const sections = document.querySelectorAll(".ud-menu-scroll");
-
-        const scrollPos =
-          window.pageYOffset ||
-          document.documentElement.scrollTop ||
-          document.body.scrollTop;
-
-        for (let i = 0; i < sections.length; i++) {
-          const currLink = sections[i];
-          let val = currLink.getAttribute("href").replace("index-screen.php","");
-          // console.log("val",val)
-          const refElement = document.querySelector(`${val}`);
-          // console.log("refElement",refElement);
-          const scrollTopMinus = scrollPos + 73;
-          
-          if ( 
-            refElement.offsetTop <= scrollTopMinus &&
-            refElement.offsetTop + refElement.offsetHeight > scrollTopMinus
-          ) {
-            document
-              .querySelector(".ud-menu-scroll")
-              .classList.remove("active");
-            currLink.classList.add("active");
-          } else {
-            currLink.classList.remove("active");
-          }
-        }
-      }
-
-      window.document.addEventListener("scroll", onScroll);
-    </script>
   </body>
 </html>

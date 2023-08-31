@@ -25,7 +25,7 @@ $(document).ready(function () {
 
         $.ajax({
             type: "POST",
-            url: "../signin.php",
+            url: "../api/signin.php",
             data: formData,
             dataType: 'json',
             encode: false,
@@ -33,13 +33,13 @@ $(document).ready(function () {
             console.log('Response data:', data);
             if (data.success) {
                 //Mesajı göster 
-                $("#signin-response-message").html('<div class="valid">' + data + '</div>');
+                $("#signin-response-message").html('<div class="valid">' + data.message + '</div>');
                 //1 saniye bekle ve anasayfaya git
 
                 setTimeout(function () {
                     // $('#useractive').css('display', 'block');
                     // $('#userinactive').css('display', 'none');
-                    window.location.href = "../screens/user-account-screen.php";
+                    window.location.href = "../screens/index-screen.php";
                 }, 1000);
             } else {
                 $("#signin-response-message").html(

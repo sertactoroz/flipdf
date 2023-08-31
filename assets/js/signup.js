@@ -12,7 +12,7 @@ $(document).ready(function () {
 
     const passwords = document.querySelectorAll('#password, #re-password');
     var allConditionsMet;
-
+    var passwordMatch;
     //Hide/Show Password
     togglePassword.addEventListener('click', function (e) {
         passwords.forEach(v => {
@@ -28,13 +28,11 @@ $(document).ready(function () {
         invalidPasswordMessage.style.display = "block";
     }
 
-    // When the user clicks outside of the password field, hide the message box
-    passwords[0].onblur = function () {
-        invalidPasswordMessage.style.display = "none";
-    }
 
     // When the user starts to type something inside the password field
-    passwords[0].onkeyup = function () {
+    passwords[0].onkeyup = checkpwd1
+    
+    function checkpwd1() {
 
         var lowerCaseLetters = /[a-z]/g;
         var upperCaseLetters = /[A-Z]/g;
@@ -62,20 +60,36 @@ $(document).ready(function () {
         allConditionsMet = (lowercaseValid && uppercaseValid && numbersValid && validLength);
 
     }
-    passwords[1].onkeyup = function () {
+    passwords[1].onblur = checkpwd();
+    passwords[0].onblur = checkpwd();
+    
+    
+    $('#password').on('autocompleteselect', function (e, ui) {
+        checkpwd1();
+ });
+ $('#re-password').on('autocompleteselect', function (e, ui) {
+    checkpwd1();
+});
+
+    function checkpwd() {
         // Enable or disable the submit button based on the conditions
         passwordMatch = (passwords[0].value === passwords[1].value);
         // Hide message box element after a second
         if (allConditionsMet && passwordMatch) {
             signupButton.disabled = false;
             console.log('signup button activated')
-
+        }else{
+            signupButton.disabled = true;
+            console.log('signup button de-activated')
         }
+        console.log(passwordMatch);
+
     }
     //Submit Form with ajax - Asynchronous JavaScript and XML
 
     $("#signup-button").click(function (event) {
         console.log('clicked')
+        if (allConditionsMet && passwordMatch) {
         var formData = {
             name: $("#name").val(),
             surname: $("#surname").val(),
@@ -85,7 +99,7 @@ $(document).ready(function () {
 
         $.ajax({
             type: "POST",
-            url: "../signup.php",
+            url: "../api/signup.php",
             data: formData,
             dataType: 'json',
             encode: false,
@@ -101,7 +115,7 @@ $(document).ready(function () {
                 setTimeout(function () {
                     // $('#useractive').css('display', 'block');
                     // $('#userinactive').css('display', 'none');
-                    // window.location.href = "index-screen.php#home";
+                    window.location.href = "index-screen.php#home";
                 }, 1000);
             } else {
                 $('#signup-response-message').html(
@@ -115,10 +129,24 @@ $(document).ready(function () {
 
         });
         event.preventDefault();
+    }else{
+        $('#signup-response-message').html(
+            '<div class="alert alert-fail">Bir hata oluştu</div>'
+        );
+    }
     });
     // $("#logout").click(function (event) {
     //     console.log(event);
 
     // });
+
+    mail = Math.floor(Math.random() * 10000000000);
+    document.getElementById("name").value = "Sertaç";
+    document.getElementById("surname").value = "Toröz";
+    document.getElementById("email").value = mail + "@test.com";
+    document.getElementById("password").value = "1234Abcd";
+    document.getElementById("re-password").value = "1234Abcd";
+    checkpwd1();
+    checkpwd();
 
 });
