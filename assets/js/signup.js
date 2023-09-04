@@ -11,8 +11,8 @@ $(document).ready(function () {
     const invalidPasswordMessage = document.getElementById('invalid-password-message');
 
     const passwords = document.querySelectorAll('#password, #re-password');
-    var allConditionsMet;
-    var passwordMatch;
+    let allConditionsMet;
+    let passwordMatch;
     //Hide/Show Password
     togglePassword.addEventListener('click', function (e) {
         passwords.forEach(v => {
@@ -28,24 +28,23 @@ $(document).ready(function () {
         invalidPasswordMessage.style.display = "block";
     }
 
-
     // When the user starts to type something inside the password field
     passwords[0].onkeyup = checkpwd1
 
     function checkpwd1() {
 
-        var lowerCaseLetters = /[a-z]/g;
-        var upperCaseLetters = /[A-Z]/g;
-        var numbers = /[0-9]/g;
-        var validLength;
+        let lowerCaseLetters = /[a-z]/g;
+        let upperCaseLetters = /[A-Z]/g;
+        let numbers = /[0-9]/g;
+        let validLength;
         if (passwords[0].value.length >= 8) {
             validLength = true;
         } else {
             validLength = false;
         }
-        var lowercaseValid = passwords[0].value.match(lowerCaseLetters);
-        var uppercaseValid = passwords[0].value.match(upperCaseLetters);
-        var numbersValid = passwords[0].value.match(numbers);
+        let lowercaseValid = passwords[0].value.match(lowerCaseLetters);
+        let uppercaseValid = passwords[0].value.match(upperCaseLetters);
+        let numbersValid = passwords[0].value.match(numbers);
 
         letter.classList.toggle("valid", lowercaseValid);
         letter.classList.toggle("invalid", !lowercaseValid);
@@ -62,7 +61,6 @@ $(document).ready(function () {
     }
     passwords[1].onblur = checkpwd();
     passwords[0].onblur = checkpwd();
-
 
     $('#password').on('autocompleteselect', function (e, ui) {
         checkpwd1();
@@ -90,7 +88,7 @@ $(document).ready(function () {
     $("#signup-button").click(function (event) {
         console.log('clicked')
         if (allConditionsMet && passwordMatch) {
-            var formData = {
+            let formData = {
                 name: $("#name").val(),
                 surname: $("#surname").val(),
                 email: $("#email").val(),
@@ -104,6 +102,7 @@ $(document).ready(function () {
                 dataType: 'json',
                 encode: false,
             }).done(function (data) {
+
                 console.log('done', data)
 
                 if (data.success) {

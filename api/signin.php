@@ -48,11 +48,14 @@ if ($result->num_rows > 0) {
     // );
  
     session_start();
+    
     $name = $row['name'];
     $email = $row['email'];
+    $userid = $row['userid'];
 
     $_SESSION['user_name'] = $name;
     $_SESSION['user_email'] = $email;
+    $_SESSION['user_id'] = $userid;
     
 	  //echo 'Şifre Doğru </br>';
          // Getting the 'name' value from the fetched row

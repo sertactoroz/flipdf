@@ -59,9 +59,12 @@ if (strlen($password) < 8 || !$number || !$uppercase || !$lowercase ) {
                 "success" => true,
                 "message" => "Sign up succeed"
             );
+            
             session_start();
             $_SESSION['user_name'] = $name;
             $_SESSION['user_email'] = $email;
+            $_SESSION['user_id'] = $row['userid'];
+
           
         } else {
             $data = array(

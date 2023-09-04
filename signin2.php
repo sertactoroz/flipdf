@@ -9,6 +9,7 @@ $data = "";
 // Bağlantı Oluştur
 $conn = new mysqli($servername, $username, $password, $dbname);
 
+
 // Bağlantıyı kontrol et
 if ($conn->connect_error) {
   // $data = $conn->connect_error;
@@ -32,6 +33,7 @@ echo "Password: $password<br>";
 // Perform SQL query 
 $sql = "SELECT * FROM users where email='$email'";
 $result = $conn->query($sql);
+
 
 if ($result->num_rows > 0) {
 

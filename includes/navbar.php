@@ -177,14 +177,16 @@
 <?php
 // SECURITY - bu bağlantıyı user uid ile yapmak lazım
 
-if (isset($_SESSION['user_name']) && !empty($_SESSION['user_name'])) {
+if (isset($_SESSION['user_id']) && !empty($_SESSION['user_id'])) {
+    $user_id = $_SESSION['user_id'];
     $user_name = $_SESSION['user_name'];
+    $user_mail = $_SESSION['user_email'];
 ?>
     <div class="hidden justify-end pr-16 sm:flex lg:pr-0">
         <a href="../screens/user-account-screen.php" class="loginBtn py-3 px-7 text-base font-medium text-white hover:opacity-70">
-        <?php echo $user_name; ?>'s Account
+       <?php echo $user_name; ?>'s Account
         </a>
-        <a id="logout" href="../includes/logout.php" class="loginBtn py-3 px-7 text-base font-medium text-white hover:opacity-70">
+        <a id="logout" href="../includes/logout.php" class="loginBtn py-3 px-7 text-base font-medium text-white hover:opacity-70" style="display: flex; align-items: center;">
         Logout
         </a>
     </div>
