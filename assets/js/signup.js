@@ -31,7 +31,7 @@ $(document).ready(function () {
 
     // When the user starts to type something inside the password field
     passwords[0].onkeyup = checkpwd1
-    
+
     function checkpwd1() {
 
         var lowerCaseLetters = /[a-z]/g;
@@ -62,14 +62,14 @@ $(document).ready(function () {
     }
     passwords[1].onblur = checkpwd();
     passwords[0].onblur = checkpwd();
-    
-    
+
+
     $('#password').on('autocompleteselect', function (e, ui) {
         checkpwd1();
- });
- $('#re-password').on('autocompleteselect', function (e, ui) {
-    checkpwd1();
-});
+    });
+    $('#re-password').on('autocompleteselect', function (e, ui) {
+        checkpwd1();
+    });
 
     function checkpwd() {
         // Enable or disable the submit button based on the conditions
@@ -78,7 +78,7 @@ $(document).ready(function () {
         if (allConditionsMet && passwordMatch) {
             signupButton.disabled = false;
             console.log('signup button activated')
-        }else{
+        } else {
             signupButton.disabled = true;
             console.log('signup button de-activated')
         }
@@ -90,50 +90,50 @@ $(document).ready(function () {
     $("#signup-button").click(function (event) {
         console.log('clicked')
         if (allConditionsMet && passwordMatch) {
-        var formData = {
-            name: $("#name").val(),
-            surname: $("#surname").val(),
-            email: $("#email").val(),
-            password: $("#password").val(),
-        };
+            var formData = {
+                name: $("#name").val(),
+                surname: $("#surname").val(),
+                email: $("#email").val(),
+                password: $("#password").val(),
+            };
 
-        $.ajax({
-            type: "POST",
-            url: "../api/signup.php",
-            data: formData,
-            dataType: 'json',
-            encode: false,
-        }).done(function (data) {
-            console.log('done', data)
+            $.ajax({
+                type: "POST",
+                url: "../api/signup.php",
+                data: formData,
+                dataType: 'json',
+                encode: false,
+            }).done(function (data) {
+                console.log('done', data)
 
-            if (data.success) {
-                console.log('data', data)
-                //Mesajı göster 
-                $('#signup-response-message').html('<div class="valid">' + data.message + '</div>');
-                //1 saniye bekle ve anasayfaya git
+                if (data.success) {
+                    console.log('data', data)
+                    //Mesajı göster 
+                    $('#signup-response-message').html('<div class="valid">' + data.message + '</div>');
+                    //1 saniye bekle ve anasayfaya git
 
-                setTimeout(function () {
-                    // $('#useractive').css('display', 'block');
-                    // $('#userinactive').css('display', 'none');
-                    window.location.href = "index-screen.php#home";
-                }, 1000);
-            } else {
+                    setTimeout(function () {
+                        // $('#useractive').css('display', 'block');
+                        // $('#userinactive').css('display', 'none');
+                        window.location.href = "index-screen.php#home";
+                    }, 1000);
+                } else {
+                    $('#signup-response-message').html(
+                        '<div class="alert alert-fail">' + data.message + "</div>"
+                    );
+                }
+            }).fail(function (data) {
                 $('#signup-response-message').html(
                     '<div class="alert alert-fail">' + data.message + "</div>"
                 );
-            }
-        }).fail(function (data) {
-            $('#signup-response-message').html(
-                '<div class="alert alert-fail">' + data.message + "</div>"
-            );
 
-        });
-        event.preventDefault();
-    }else{
-        $('#signup-response-message').html(
-            '<div class="alert alert-fail">Bir hata oluştu</div>'
-        );
-    }
+            });
+            event.preventDefault();
+        } else {
+            $('#signup-response-message').html(
+                '<div class="alert alert-fail">Bir hata oluştu</div>'
+            );
+        }
     });
     // $("#logout").click(function (event) {
     //     console.log(event);
